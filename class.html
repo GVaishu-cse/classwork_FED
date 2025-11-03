@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum and Product of Array</title>
+</head>
+<body>
+    <h2>Sum and Product of Array</h2>
+
+    <p>Array: <span id="array"></span></p>
+    <p>Sum: <span id="sum"></span></p>
+    <p>Product: <span id="product"></span></p>
+
+    <script>
+
+        function sumAndProduct(arr) {
+            let sum = 0;
+            let product = 1;
+
+            for (let i = 0; i < arr.length; i++) {
+                sum += arr[i];
+                product *= arr[i];
+            }
+
+            return { sum, product };
+        }
+
+        let numbers = [2, 3, 4, 5];
+        let result = sumAndProduct(numbers);
+        document.getElementById("array").textContent = numbers.join(", ");
+        document.getElementById("sum").textContent = result.sum;
+        document.getElementById("product").textContent = result.product;
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particle Heart Outline</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: black;
+      overflow: hidden;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .name {
+      position: absolute;
+      color: #ff69b4;
+      font-size: 42px;
+      font-family: "Segoe UI", sans-serif;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff1493;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div class="name">💖 yamini 💖</div>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    const numParticles = 1500; // density of outline dots
+    let angle = 0;
+
+    // Generate heart outline points
+    for (let i = 0; i < numParticles; i++) {
+      let t = Math.random() * Math.PI * 2;
+      let x = 16 * Math.pow(Math.sin(t), 3);
+      let y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+
+      particles.push({
+        x: x,
+        y: -y,
+        size: Math.random() * 1.5 + 0.5,
+        offset: Math.random() * 2 * Math.PI // sparkle phase
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      let centerX = canvas.width / 2;
+      let centerY = canvas.height / 2;
+      angle += 0.02; // rotation speed
+
+      particles.forEach(p => {
+        // sidewise rotation effect
+        let scale = Math.cos(angle);
+        let xRot = p.x * 15 * scale;
+        let yRot = p.y * 15;
+
+        // sparkle (size pulsation)
+        let sparkle = p.size * (1 + 0.5 * Math.sin(angle + p.offset));
+
+        ctx.beginPath();
+        ctx.arc(centerX + xRot, centerY + yRot, sparkle, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,105,180,0.9)";
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+</body>
+</html>

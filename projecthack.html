@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FEDF-PS10: Learning Management System (LMS)</title>
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --accent:#0f62fe;
+      --muted:#6b7280;
+      --radius:14px;
+      --maxwidth:900px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#eef3ff 60%);
+      color:#0b1220;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:32px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--maxwidth);
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow: 0 8px 30px rgba(15,18,25,0.08);
+      padding:28px;
+      border:1px solid rgba(11,18,32,0.04);
+    }
+
+    header{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),#6b46c1);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-weight:700;
+      font-size:20px;
+      box-shadow:0 6px 18px rgba(15,98,254,0.12);
+    }
+    h1{
+      margin:0;
+      font-size:20px;
+      letter-spacing: -0.2px;
+    }
+    p.lead{
+      margin:8px 0 20px 0;
+      color:var(--muted);
+    }
+
+    .card{
+      padding:18px;
+      border-radius:12px;
+      background:linear-gradient(180deg,#fff,#fbfdff);
+      border:1px solid rgba(11,18,32,0.04);
+    }
+
+    .intro{
+      display:flex;
+      gap:24px;
+      align-items:flex-start;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+    .intro .meta{
+      flex: 1 1 280px;
+    }
+    .intro .desc{
+      flex: 2 1 420px;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    .roles{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .role{
+      background:linear-gradient(180deg,#ffffff,#fbfdff);
+      border-radius:10px;
+      padding:12px;
+      border:1px solid rgba(11,18,32,0.04);
+      box-shadow:0 4px 14px rgba(11,18,32,0.03);
+    }
+    .role h3{
+      margin:0 0 8px 0;
+      font-size:15px;
+      color:var(--accent);
+    }
+    .role p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .actions{
+      margin-top:18px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      appearance:none;
+      border:0;
+      background:var(--accent);
+      color:white;
+      padding:10px 14px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+      box-shadow:0 6px 18px rgba(15,98,254,0.12);
+    }
+    .btn.secondary{
+      background:transparent;
+      color:var(--accent);
+      border:1px solid rgba(15,98,254,0.12);
+      box-shadow:none;
+    }
+
+    /* small responsive */
+    @media (max-width:560px){
+      body{padding:16px}
+      .container{padding:18px}
+      header{gap:12px}
+      .logo{width:48px;height:48px;font-size:18px}
+    }
+
+    /* simple print */
+    @media print{
+      body{background:white}
+      .container{box-shadow:none;border:none}
+    }
+  </style>
+</head>
+<body>
+  <main class="container" role="main" aria-label="LMS project brief">
+    <header>
+      <div class="logo" aria-hidden="true">LMS</div>
+      <div>
+        <h1>FEDF-PS10: Develop a unique and effective learning management system (LMS)</h1>
+        <p class="lead">Create a comprehensive LMS for managing online education — for educators, content creators, and students.</p>
+      </div>
+    </header>
+
+    <section class="card" aria-labelledby="overview">
+      <div id="overview" class="intro">
+        <div class="meta">
+          <strong>Goal</strong>
+          <p class="desc">Build an app to handle user roles, course content creation and publishing, and tools that make it easy for educators to deliver and manage online learning effectively.</p>
+        </div>
+
+        <div>
+          <strong>Core features</strong>
+          <ul style="margin:8px 0 0 18px;color:var(--muted);">
+            <li>Create & manage courses and lessons</li>
+            <li>Role-based access & user management</li>
+            <li>Assignments, grading & progress tracking</li>
+            <li>Content creation & publishing workflow</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 style="font-size:16px;margin:14px 0 8px 0;color:#0b1220">User roles</h2>
+      <div class="roles" role="list">
+        <article class="role" role="listitem" aria-labelledby="admin-title">
+          <h3 id="admin-title">Admin</h3>
+          <p>Manage platform settings, user roles, permissions, and oversee course content and platform-level analytics.</p>
+        </article>
+
+        <article class="role" role="listitem" aria-labelledby="instructor-title">
+          <h3 id="instructor-title">Instructor</h3>
+          <p>Create and manage courses, upload lessons and resources, create and grade assignments, and interact with students via messages & forums.</p>
+        </article>
+
+        <article class="role" role="listitem" aria-labelledby="student-title">
+          <h3 id="student-title">Student</h3>
+          <p>Enroll in courses, complete lessons, submit assignments, view grades, and track learning progress and achievements.</p>
+        </article>
+
+        <article class="role" role="listitem" aria-labelledby="creator-title">
+          <h3 id="creator-title">Content Creator</h3>
+          <p>Develop course materials, update multimedia content, collaborate with instructors, and ensure educational quality and accessibility.</p>
+        </article>
+      </div>
+
+      <div class="actions">
+        <button class="btn" onclick="alert('Start designing your system architecture — think authentication, RBAC, course model, and storage.')">Design architecture</button>
+        <button class="btn secondary" onclick="alert('Consider features: SCORM/xAPI support, multimedia hosting, analytics, offline access, and mobile responsiveness.')">Suggested features</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Tiny accessibility helper: focus outline for keyboard users
+    window.addEventListener('keydown', function(e){
+      if(e.key === 'Tab') document.body.classList.add('show-focus');
+    });
+  </script>
+</body>
+</html>

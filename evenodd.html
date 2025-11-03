@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Even or Odd Numbers</title>
+</head>
+<body>
+    <h1>Check Even or Odd Numbers</h1>
+
+    <div id="output"></div>
+    <script>
+    
+        let outputDiv = document.getElementById('output');
+
+        for (let i = 1; i <= 5 ; i++) {
+            if (i % 2 === 0) {
+                outputDiv.innerHTML += i + " is even<br>";
+            } else {
+                outputDiv.innerHTML += i + " is odd<br>";
+            }
+        }
+    </script>
+</body>
+</html>5

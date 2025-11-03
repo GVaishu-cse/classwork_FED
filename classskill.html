@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rupa • Portfolio</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card:#121832;
+      --muted:#a7b0d6;
+      --brand:#7c3aed;
+      --brand2:#06b6d4;
+      --text:#e9ecff;
+      --shadow:0 10px 24px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:var(--text);
+      background:radial-gradient(1200px 600px at 10% -10%, rgba(124,58,237,.25), transparent),
+                 radial-gradient(1200px 600px at 90% 110%, rgba(6,182,212,.18), transparent),
+                 var(--bg);
+    }
+    .site-header{
+      position:sticky; top:0; z-index:20;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 20px;
+      background:linear-gradient(to bottom, rgba(11,16,32,.9), rgba(11,16,32,.6));
+      backdrop-filter: blur(6px);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .brand{
+      font-weight:800; font-size:20px;
+      text-decoration:none;
+      background:linear-gradient(90deg,var(--brand),var(--brand2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .nav{display:flex; gap:18px}
+    .nav-link{
+      position:relative; color:var(--muted); text-decoration:none;
+      font-weight:600; padding:6px 8px; border-radius:10px; transition:.2s;
+    }
+    .nav-link::after{
+      content:""; position:absolute; left:10px; right:10px; bottom:2px; height:2px;
+      background:linear-gradient(90deg,var(--brand),var(--brand2));
+      transform:scaleX(0); transform-origin:left; transition:transform .2s;
+    }
+    .nav-link:hover{color:#fff}
+    .nav-link:hover::after{transform:scaleX(1)}
+    .container{max-width:1000px; margin:60px auto; padding:0 20px}
+    .about{display:grid; grid-template-columns:140px 1fr; gap:24px; align-items:center}
+    .avatar{width:120px;height:120px;display:block; border-radius:50%; box-shadow:var(--shadow)}
+    .about-content h1{margin:0 0 8px; font-size:32px}
+    .about-content p{margin:0; line-height:1.7; color:var(--muted)}
+    .skills{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; list-style:none; padding:0; margin:16px 0 0}
+    .skill{display:flex; align-items:center; gap:10px; padding:12px; border-radius:16px; background:var(--card); box-shadow:var(--shadow)}
+    .logo{width:34px; height:34px}
+    .logo svg{width:100%; height:100%}
+    .projects{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px}
+    .card{background:var(--card); padding:16px; border-radius:18px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:10px}
+    .btn{align-self:flex-start; border:0; padding:10px 14px; border-radius:12px;
+      background:linear-gradient(90deg,var(--brand),var(--brand2)); color:#fff; font-weight:700;
+      cursor:pointer; text-decoration:none; display:inline-block;
+    }
+    .recs{list-style:none; padding:0; margin:16px 0 24px; display:grid; gap:10px}
+    .rec{background:var(--card); padding:14px 16px; border-radius:16px; box-shadow:var(--shadow)}
+    .rec-form{display:grid; gap:10px}
+    .rec-form textarea{resize:vertical; min-height:80px; padding:12px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.1); background:#0e1430; color:#fff; outline:none;}
+    .rec-form textarea:focus{border-color:var(--brand2)}
+    .home-fab{
+      position:fixed; right:20px; bottom:20px; width:52px; height:52px; border-radius:50%;
+      display:grid; place-items:center; background:linear-gradient(135deg,var(--brand),var(--brand2));
+      box-shadow:var(--shadow); text-decoration:none;
+    }
+    .home-icon{width:26px; height:26px; fill:#fff}
+    .dialog::backdrop{background:rgba(0,0,0,.5)}
+    .dialog{border:none; border-radius:16px; padding:0; background:transparent}
+    .dialog-card{background:var(--card); padding:20px; border-radius:16px; min-width:280px; text-align:center; box-shadow:var(--shadow)}
+    .dialog-icon{width:40px; height:40px; margin:0 auto 10px; border-radius:999px;
+      display:grid; place-items:center; font-weight:900; background:#16a34a; color:#fff}
+    .site-footer{text-align:center; color:var(--muted); padding:40px 0}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="#home" class="brand" id="home">Rupa</a>
+    <nav class="nav">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#projects" class="nav-link">Project details</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#recommendations" class="nav-link">Recommendations</a>
+    </nav>
+  </header>
+
+  <section id="about" class="container about">
+    <svg viewBox="0 0 120 120" class="avatar">
+      <defs>
+        <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="#7c3aed"/>
+          <stop offset="100%" stop-color="#06b6d4"/>
+        </linearGradient>
+      </defs>
+      <circle cx="60" cy="60" r="58" fill="url(#g)" />
+      <circle cx="60" cy="50" r="22" fill="white" opacity="0.9"/>
+      <path d="M18 108c6-22 26-32 42-32s36 10 42 32" fill="white" opacity="0.9"/>
+      <text x="60" y="58" text-anchor="middle" font-size="16" font-family="Segoe UI" fill="#111">R</text>
+    </svg>
+    <div class="about-content">
+      <h1>Hi, I’m Rupa</h1>
+      <p>I build clean, responsive web interfaces and love solving data problems.
+        I’m currently exploring intelligent agents, algorithm design, and ML foundations.</p>
+    </div>
+  </section>
+
+  <section id="skills" class="container">
+    <h2>Skills</h2>
+    <ul class="skills">
+      <li class="skill"><div class="logo">HTML</div><span>HTML5</span></li>
+      <li class="skill"><div class="logo">CSS</div><span>CSS3</span></li>
+      <li class="skill"><div class="logo">JS</div><span>JavaScript</span></li>
+      <li class="skill"><div class="logo">Py</div><span>Python</span></li>
+    </ul>
+  </section>
+
+  <section id="projects" class="container">
+    <h2>Project details</h2>
+    <div class="projects">
+      <article class="card"><h3>Campus Navigator</h3><p>PWA with offline maps and building search.</p></article>
+      <article class="card"><h3>AlgoLab</h3><p>Interactive visualizations for Quick Sort, Convex Hull, DP.</p></article>
+      <article class="card"><h3>Titanic Insights</h3><p>End-to-end data pipeline and ML dashboard.</p></article>
+    </div>
+  </section>
+
+  <section id="recommendations" class="container">
+    <h2>Recommendations</h2>
+    <ul id="recList" class="recs">
+      <li class="rec">“Rupa delivers clean, maintainable code.” — <b>Anita</b></li>
+      <li class="rec">“Great at explaining algorithms simply.” — <b>Rahul</b></li>
+      <li class="rec">“Attention to UX details is outstanding.” — <b>Dev</b></li>
+    </ul>
+    <form id="recForm" class="rec-form">
+      <textarea id="recText" placeholder="Write your recommendation..." required></textarea>
+      <button type="submit" class="btn">Submit Recommendation</button>
+    </form>
+  </section>
+
+  <a href="#home" class="home-fab"><svg viewBox="0 0 24 24" class="home-icon"><path d="M12 3l9 8h-3v8h-5v-5H11v5H6v-8H3l9-8z"/></svg></a>
+
+  <dialog id="confirmDialog" class="dialog">
+    <div class="dialog-card">
+      <div class="dialog-icon">✓</div>
+      <p>Thank you! Your recommendation has been added.</p>
+      <button id="closeDialog" class="btn">OK</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer"><small>© <span id="year"></span> Rupa</small></footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const recForm=document.getElementById('recForm'),
+          recText=document.getElementById('recText'),
+          recList=document.getElementById('recList'),
+          dialog=document.getElementById('confirmDialog'),
+          closeDialog=document.getElementById('closeDialog');
+    recForm.addEventListener('submit',e=>{
+      e.preventDefault();
+      const text=recText.value.trim();
+      if(!text) return;
+      const li=document.createElement('li');
+      li.className='rec'; li.textContent=`${text} — You`;
+      recList.appendChild(li);
+      recText.value='';
+      if(typeof dialog.showModal==='function'){dialog.showModal();}
+      else alert('Thank you! Your recommendation has been added.');
+    });
+    closeDialog.addEventListener('click',()=>dialog.close());
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+package package1;
+
+import java.io.*;
+import java.time.*;
+import java.util.*;
+
+enum ArticleStatus { DRAFT, UNDER_REVIEW, APPROVED, PUBLISHED, ARCHIVED; }
+
+class Feedback implements Serializable {
+    String user; String comment; int rating; LocalDateTime date = LocalDateTime.now();
+    public Feedback(String user, String comment, int rating) { this.user=user; this.comment=comment; this.rating=rating; }
+}
+
+class RevisionHistory implements Serializable {
+    String editor, summary; LocalDateTime date=LocalDateTime.now();
+    public RevisionHistory(String editor, String summary) { this.editor=editor; this.summary=summary; }
+}
+
+class Attachment implements Serializable {
+    String filename, path;
+    public Attachment(String filename, String path) { this.filename=filename; this.path=path; }
+}
+
+class Contributor implements Serializable {
+    String name, role;
+    public Contributor(String name, String role) { this.name=name; this.role=role; }
+}
+
+abstract class Article implements Serializable {
+    static int idCounter=1; final int id;
+    String question, answer, category; Set<String> tags=new HashSet<>();
+    List<Attachment> attachments=new ArrayList<>();
+    LocalDateTime createdDate=LocalDateTime.now(), lastUpdated=LocalDateTime.now();
+    ArticleStatus status=ArticleStatus.DRAFT;
+    Set<Contributor> contributors=new HashSet<>();
+    List<Feedback> feedbackList=new ArrayList<>();
+    List<RevisionHistory> revisionHistory=new ArrayList<>();
+    Set<Article> relatedArticles=new HashSet<>();
+    int viewCount=0, upvotes=0, downvotes=0;
+    public Article(String question, String answer, String category) { this.id=idCounter++; this.question=question; this.answer=answer; this.category=category; }
+    public void addFeedback(Feedback fb) { feedbackList.add(fb); }
+    public void addRevision(RevisionHistory rev) { revisionHistory.add(rev); }
+    public void attach(Attachment att) { attachments.add(att); }
+    public void update(String newAnswer) { this.answer=newAnswer; lastUpdated=LocalDateTime.now(); }
+    public String toString() { return "[#"+id+"] Q: "+question+" ("+status+")"; }
+}
+
+class FAQArticle extends Article { public FAQArticle(String q, String a, String c) { super(q,a,c); } }
+
+class KnowledgeBaseManager {
+    private static KnowledgeBaseManager instance;
+    List<Article> articles=new ArrayList<>();
+    private KnowledgeBaseManager(){}
+    public static KnowledgeBaseManager getInstance() { if(instance==null) instance=new KnowledgeBaseManager(); return instance; }
+    public void addArticle(Article a) { articles.add(a); }
+    public List<Article> getArticles() { return articles; }
+    public void saveData() { try(ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("kb.ser"))) { out.writeObject(articles); } catch(Exception e){} }
+    public void loadData() { try(ObjectInputStream in=new ObjectInputStream(new FileInputStream("kb.ser"))) { articles=(List<Article>)in.readObject(); } catch(Exception e){} }
+}
+
+interface FeedbackObserver { void update(Article article, Feedback fb); }
+class NotificationService implements FeedbackObserver { public void update(Article article, Feedback fb) { System.out.println("Notification: New feedback on article #"+article.id); } }
+
+class WorkflowAutomation {
+    public static void moveToNextState(Article a) {
+        switch(a.status){ case DRAFT:a.status=ArticleStatus.UNDER_REVIEW; break; case UNDER_REVIEW:a.status=ArticleStatus.APPROVED; break; case APPROVED:a.status=ArticleStatus.PUBLISHED; break; default: System.out.println("End state."); }
+    }
+}
+
+class Analytics {
+    public static void showStats(List<Article> list) {
+        System.out.println("Total articles: "+list.size());
+        Map<String,Integer> tags=new HashMap<>();
+        for(Article a:list) for(String t:a.tags) tags.put(t,tags.getOrDefault(t,0)+1);
+        System.out.println("Tags: "+tags);
+    }
+}
+
+class SecurityManager { static String pin="1234"; public static boolean validate(String input){return pin.equals(input);} }
+
+class ExportImportUtil {
+    public static void exportToCSV(List<Article> list,String f){ try(PrintWriter p=new PrintWriter(new FileWriter(f))) { for(Article a:list) p.println(a.id+","+a.question); } catch(Exception e){} }
+    public static List<Article> importFromCSV(String f){ List<Article> l=new ArrayList<>(); try(BufferedReader b=new BufferedReader(new FileReader(f))) { String line; while((line=b.readLine())!=null) { String[] s=line.split(","); l.add(new FAQArticle(s[1],"","")); }} catch(Exception e){} return l; }
+}
+
+class ArticleUtils {
+    public static Article mergeArticles(Article a1,Article a2){ Article m=new FAQArticle(a1.question+" / "+a2.question,a1.answer+" "+a2.answer,a1.category); return m; }
+}
+
+interface Command{void execute();void undo();}
+
+class EditArticleCommand implements Command {
+    Article a; String oldA,newA; public EditArticleCommand(Article a,String n){this.a=a;oldA=a.answer;newA=n;}
+    public void execute(){a.update(newA);}
+    public void undo(){a.update(oldA);}
+}
+
+class CommandManager{
+    Stack<Command> hist=new Stack<>(),redo=new Stack<>();
+    public void executeCommand(Command c){ c.execute(); hist.push(c); redo.clear(); }
+    public void undo(){ if(!hist.isEmpty()){Command c=hist.pop(); c.undo(); redo.push(c);} }
+    public void redo(){ if(!redo.isEmpty()){Command c=redo.pop(); c.execute(); hist.push(c);} }
+}
+
+class RestAPIStub { public static void postArticle(Article a){System.out.println("POST: "+a.question);} }
+
+public class JavaMain{
+    static Scanner sc=new Scanner(System.in);
+    static KnowledgeBaseManager kb=KnowledgeBaseManager.getInstance();
+    static CommandManager cmdMgr=new CommandManager();
+    public static void main(String[] args){
+        kb.loadData();
+        while(true){
+            System.out.println("1.Add \n2.View \n3.Undo \n4.Redo \n5.Analytics \n6.Export \n7.Exit");
+            System.out.print("Enter your option: ");
+            int c=sc.nextInt(); sc.nextLine();
+            if(c==1){ System.out.print("Q:");String q=sc.nextLine();System.out.print("A:");String a=sc.nextLine();kb.addArticle(new FAQArticle(q,a,"General"));}
+            else if(c==2){ for(Article a:kb.getArticles()) System.out.println(a);}
+            else if(c==3){cmdMgr.undo();}
+            else if(c==4){cmdMgr.redo();}
+            else if(c==5){Analytics.showStats(kb.getArticles());}
+            else if(c==6){ExportImportUtil.exportToCSV(kb.getArticles(),"export.csv");}
+            else if(c==7){kb.saveData();break;}
+        }
+    }
+}

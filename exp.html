@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration</title>
+  <style>
+    .error { color:red; font-size:12px; }
+    .success { color:green; font-weight:bold; }
+    input.valid, select.valid, textarea.valid { border:2px solid green; }
+    input.invalid, select.invalid, textarea.invalid { border:2px solid red; }
+  </style>
+</head>
+<body>
+  <h2>Student Registration Form</h2>
+  <form id="studentForm" novalidate>
+    Full Name: <input type="text" id="fullName" required><div id="nameErr" class="error"></div><br>
+    Email: <input type="email" id="email" required><div id="emailErr" class="error"></div><br>
+    Password: <input type="password" id="password" required><div id="passErr" class="error"></div><br>
+    Phone: <input type="tel" id="phone" required><div id="phoneErr" class="error"></div><br>
+    <button type="submit">Submit</button>
+    <div id="success" class="success"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById("studentForm");
+    const name = document.getElementById("fullName");
+    const email = document.getElementById("email");
+    const pass = document.getElementById("password");
+    const phone = document.getElementById("phone");
+
+    function setValidity(input, msgId, isValid, msg="") {
+      document.getElementById(msgId).textContent = msg;
+      input.className = isValid ? "valid" : "invalid";
+      return isValid;
+    }
+
+    function checkName() {
+      return setValidity(name,"nameErr", name.value.trim()!=="", name.value.trim()===""?"Name required":"");
+    }
+    function checkEmail() {
+      const re=/^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+      return setValidity(email,"emailErr", re.test(email.value),"Invalid email");
+    }
+    function checkPass() {
+      const re=/(?=.*\d)(?=.*[@$!%*?&]).{6,}/;
+      return setValidity(pass,"passErr", re.test(pass.value),"Weak password");
+    }
+    function checkPhone() {
+      const re=/^\d{10}$/;
+      return setValidity(phone,"phoneErr", re.test(phone.value),"10-digit phone required");
+    }
+
+    [name,email,pass,phone].forEach(inp=>{
+      inp.addEventListener("input",()=> {
+        if(inp===name) checkName();
+        if(inp===email) checkEmail();
+        if(inp===pass) checkPass();
+        if(inp===phone) checkPhone();
+      });
+    });
+
+    form.addEventListener("submit",e=>{
+      e.preventDefault();
+      const ok = checkName() & checkEmail() & checkPass() & checkPhone();
+      document.getElementById("success").textContent = ok ? "✅ Registration Successful!" : "";
+      if(ok) form.reset(), [name,email,pass,phone].forEach(i=>i.className="");
+    });
+  </script>
+</body>
+</html>

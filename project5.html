@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Task 1: Profile Name -->
+  <header>
+    <h1 id="profile-name">LITHISHMA BEGUM</h1>
+    <nav>
+      <!-- Task 2: Nav Bar -->
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Project details</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#recommendations">Recommendations</a></li>
+      </ul>
+    </nav>
+    <!-- Task 8: Home Icon -->
+    <div class="home-icon">🏠</div>
+  </header>
+
+  <!-- Task 3: About Me -->
+  <section id="about">
+    <h2>About Me</h2>
+    <img src="https://via.placeholder.com/150" alt="Profile Picture">
+    <p>Hello! I'm Lithishma, a passionate learner in Web Development. I enjoy building creative, responsive, and interactive websites.</p>
+  </section>
+
+  <!-- Task 4: Skills -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill"><img src="https://img.icons8.com/color/48/html-5.png"/> HTML</div>
+      <div class="skill"><img src="https://img.icons8.com/color/48/css3.png"/> CSS</div>
+      <div class="skill"><img src="https://img.icons8.com/color/48/javascript.png"/> JavaScript</div>
+      <div class="skill"><img src="https://img.icons8.com/color/48/python.png"/> Python</div>
+      <div class="skill"><img src="https://img.icons8.com/color/48/git.png"/> Git</div>
+    </div>
+  </section>
+
+  <!-- Task 5: Projects -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <ul>
+      <li><strong>Portfolio Website:</strong> Built a responsive personal portfolio using HTML, CSS, and JS.</li>
+      <li><strong>Weather App:</strong> Created a live weather application using API integration.</li>
+      <li><strong>To-Do App:</strong> Developed a task manager with local storage support.</li>
+    </ul>
+  </section>
+
+  <!-- Task 6: Recommendations -->
+  <section id="recommendations">
+    <h2>Recommendations</h2>
+    <div id="rec-list">
+      <p>"Lithishma is very hardworking and dedicated to learning."</p>
+      <p>"She has excellent problem-solving skills."</p>
+      <p>"A creative thinker with great teamwork abilities."</p>
+    </div>
+  </section>
+
+  <!-- Task 7 & 9: New Recommendation + Popup -->
+  <section id="new-recommendation">
+    <h2>Leave a Recommendation</h2>
+    <textarea id="rec-input" placeholder="Write your recommendation here..."></textarea><br>
+    <button onclick="addRecommendation()">Submit</button>
+  </section>
+
+  <div id="popup" class="popup">
+    <p>Thank you for leaving a recommendation!</p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+
+</body>
+</html>

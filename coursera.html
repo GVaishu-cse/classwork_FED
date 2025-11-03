@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      background: #333;
+      color: white;
+      padding: 15px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    header img {
+      width: 25px;
+      height: 25px;
+      margin-right: 10px;
+    }
+
+    /* Navigation Bar */
+    nav {
+      background: #444;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 40px;
+      text-align: center;
+    }
+
+    /* About Me */
+    #about img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    /* Skills */
+    .skills-list {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .skill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .skill img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 5px;
+    }
+
+    /* Projects */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .project-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* Recommendations */
+    .recommendations {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .recommendation {
+      background: white;
+      padding: 15px;
+      border-left: 5px solid #333;
+      font-style: italic;
+      border-radius: 8px;
+    }
+
+    /* Form */
+    form {
+      margin-top: 20px;
+    }
+    textarea {
+      width: 80%;
+      height: 60px;
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+    button {
+      padding: 8px 20px;
+      border: none;
+      border-radius: 5px;
+      background: #333;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #555;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Header with Home Icon + Name -->
+  <header>
+    <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home Icon">
+    <h1>SMILY</h1>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Project details</a>
+    <a href="#skills">Skills</a>
+    <a href="#recommendations">Recommendations</a>
+  </nav>
+
+  <!-- About Me -->
+  <section id="about">
+    <h2>About Me</h2>
+<img src="https://www.w3schools.com/html/img_chania.jpg" alt="Beautiful Flowers" width="400">
+    <h3>SMILY</h3>
+    <p>I am a passionate learner and developer with an interest in web technologies, problem solving, and building impactful projects.</p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-list">
+      <div class="skill">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174854.png" alt="HTML">
+        <p>HTML</p>
+      </div>
+      <div class="skill">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt="CSS">
+        <p>CSS</p>
+      </div>
+      <div class="skill">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="JavaScript">
+        <p>JavaScript</p>
+      </div>
+      <div class="skill">
+        <img src="https://cdn-icons-png.flaticon.com/512/6132/6132222.png" alt="C++">
+        <p>C++</p>
+      </div>
+      <div class="skill">
+        <img src="https://cdn-icons-png.flaticon.com/512/226/226777.png" alt="Java">
+        <p>Java</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Project Details</h2>
+    <div class="projects">
+      <div class="project-card">
+        <h3>Smart Expense Tracker</h3>
+        <p>A web app to manage and analyze personal finances effectively.</p>
+      </div>
+      <div class="project-card">
+        <h3>Online Quiz Platform</h3>
+        <p>An interactive quiz application with timer and leaderboard.</p>
+      </div>
+      <div class="project-card">
+        <h3>Weather App</h3>
+        <p>Displays real-time weather updates using open APIs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recommendations -->
+  <section id="recommendations">
+    <h2>Recommendations</h2>
+    <div class="recommendations" id="recommendationsList">
+      <div class="recommendation">"Smily is a dedicated learner and always eager to contribute to projects."</div>
+      <div class="recommendation">"She has strong problem-solving skills and works well in a team."</div>
+      <div class="recommendation">"Her enthusiasm for web development is truly inspiring."</div>
+    </div>
+
+    <!-- Add Recommendation -->
+    <form id="recommendationForm">
+      <textarea id="newRec" placeholder="Write a recommendation..."></textarea><br>
+      <button type="submit">Submit Recommendation</button>
+    </form>
+  </section>
+
+  <script>
+    // Handle new recommendation submission
+    document.getElementById("recommendationForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      let newRecText = document.getElementById("newRec").value.trim();
+      if (newRecText) {
+        let recDiv = document.createElement("div");
+        recDiv.className = "recommendation";
+        recDiv.textContent = '"' + newRecText + '"';
+        document.getElementById("recommendationsList").appendChild(recDiv);
+
+        // Show popup
+        alert("Thank you for leaving a recommendation!");
+
+        // Clear textarea
+        document.getElementById("newRec").value = "";
+      }
+    });
+  </script>
+
+</body>
+</html>
