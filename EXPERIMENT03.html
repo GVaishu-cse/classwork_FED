@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monginis Bakery</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      padding-top: 60px;
+      background-color: #fff8f0;
+    }
+
+    /* Header */
+    header {
+      background: #8bc34a;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #ffb6c1;
+      z-index: 1000;
+    }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    nav ul li {
+      margin: 0 10px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 15px;
+      display: block;
+    }
+    nav ul li a:hover {
+      background: #da70d6;
+      border-radius: 5px;
+    }
+
+    /* Sections */
+    section {
+      padding: 40px 20px;
+    }
+
+    /* Product Grid */
+    #products {
+      text-align: center;
+    }
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .product-grid img {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    /* Footer */
+    footer {
+      background: #6495ed;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      header h1 {
+        font-size: 1.4rem;
+      }
+      .product-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+      section {
+        padding: 20px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="bcbe73a57ba101e94b8056800403ccba.jpg"/>
+    <h1>MONGINIS - THE ULTIMATE COMFORT TO YOUR TASTE BUDS! 🍰</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#contact">Contact</a></li>
+       <li><a href="#About us">About us</a></li>
+    </ul>
+  </nav>
+
+  <section id="home">
+    <h2>Welcome to Monginis!</h2>
+    <p>Craving something sweet? 🍩 At Monginis, we serve happiness fresh from the oven! Whether it’s a buttery croissant, a creamy slice of cake, or a box of cookies to share, we’ve got a treat for every mood.</p>
+  </section>
+
+  <section id="products">
+    <h2>Our Products</h2>
+    <div class="product-grid">
+      <img src="CAKES.png" alt="Cakes" />
+      <img src="CUPACKES.png" alt="Cupcakes" />
+      <img src="GARLIC BREAD.png" alt="Garlic Bread" />
+      <img src="CROSSAINT.png" alt="Croissant" />
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>📞 Phone: 9000314239</p>
+    <p>📧 Email: Monginis@Bakery.com</p>
+    <p>📸 Insta Page: Bite'n'joy</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Monginis Bakery. All rights reserved.</p>
+  </footer>
+</body>
+</html>
